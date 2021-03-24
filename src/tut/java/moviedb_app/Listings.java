@@ -1,7 +1,6 @@
 package tut.java.moviedb_app;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 public class Listings {
 
@@ -13,11 +12,27 @@ public class Listings {
 
     public static void showAll() throws IOException {
         listingHeader();
-        var hashedMovies = Scraper.hashedMovies();
-        for (int i = 0; i < hashedMovies.size(); i++) {
-            var movieTitles = hashedMovies.keySet().toArray();
-            var movieLinks = hashedMovies.values().toArray();
-            System.out.printf("%d. %s (https://www.imdb.com%s)%n", i + 1, movieTitles[i], movieLinks[i]);
+
+        var movies = Scraper.getMovies();
+
+        for (int i = 0; i < movies.size(); i++) {
+
+            String title = movies.get(i).getTitle();
+            String moreInfoLink = movies.get(i).getMoreInfoLink();
+
+            System.out.printf("%d. %s (%s)%n", i + 1, title, moreInfoLink);
+
         }
+
+    }
+
+    public static void showMovieInfo(Movie movie) {
+        System.out.printf("Title: %s%n", movie.getTitle());
+        System.out.print("Genres: ");
+        movie.getGenres().forEach(genre -> System.out.printf("%s", genre));
+        System.out.printf("%nRelease Date: %s%n", movie.getReleaseDate());
+        System.out.printf("Runtime: %s%n", movie.getRuntime());
+        System.out.printf("Synopsis: %s%n", movie.getSynopsis());
+        System.out.printf("More Info: %s%n", movie.getMoreInfoLink());
     }
 }
