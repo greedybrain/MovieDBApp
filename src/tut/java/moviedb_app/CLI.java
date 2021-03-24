@@ -21,7 +21,7 @@ public class CLI {
         }
     }
 
-    private static void getNewMovieDetails() throws Exception {
+    private static void doesUserWantNewMovieDetails() throws Exception {
         Scanner scanner = new Scanner(System.in);
 
         while(true) {
@@ -48,7 +48,7 @@ public class CLI {
         System.out.printf("Synopsis: %s%n", movie.getSynopsis());
         System.out.printf("More Info: %s%n", movie.getMoreInfoLink());
 
-        getNewMovieDetails();
+        doesUserWantNewMovieDetails();
     }
 
 }

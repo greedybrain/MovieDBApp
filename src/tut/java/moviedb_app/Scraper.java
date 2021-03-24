@@ -33,14 +33,14 @@ public class Scraper {
         return movies;
     }
 
-    private static Document fromSingleMovieHtmlData(Movie movie) throws IOException {
+    private static Document getSingleMovieHtmlData(Movie movie) throws IOException {
         return Jsoup.connect(movie.getMoreInfoLink()).get();
     }
 
     public static Movie getMovie(Movie movie) throws IOException {
         List<String> genres = new ArrayList<>();
 
-        var currentMovie = fromSingleMovieHtmlData(movie);
+        var currentMovie = getSingleMovieHtmlData(movie);
         var runtime = currentMovie.select("time").text();
         var synopsis = currentMovie.select("div.summary_text").text();
 

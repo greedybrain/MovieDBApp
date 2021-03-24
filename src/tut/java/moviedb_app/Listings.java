@@ -14,7 +14,7 @@ public class Listings {
         }
     }
 
-    public static void listingHeader() {
+    private static void listingHeader() {
         System.out.println("\n=============================================================================================");
         System.out.println("\t\t\t\t\t\t\t\tTop Rated Movies of All Time");
         System.out.println("=============================================================================================");
