@@ -26,10 +26,17 @@ public class Listings {
 
     }
 
-    public static void showMovieInfo(Movie movie) {
+    public static void showMovieInfo() throws Exception {
+        var cli = new CLI();
+        var userChoice = cli.getUserChoice();
+
+        var movies = Scraper.getMovies();
+        var movie = Scraper.getMovie(movies.get(--userChoice));
+
         System.out.printf("Title: %s%n", movie.getTitle());
         System.out.print("Genres: ");
-        movie.getGenres().forEach(genre -> System.out.printf("%s", genre));
+        if (movie.getGenres().size() > 1) movie.getGenres().forEach(genre -> System.out.printf("%s, ", genre));
+        else movie.getGenres().forEach(genre -> System.out.printf("%s", genre));
         System.out.printf("%nRelease Date: %s%n", movie.getReleaseDate());
         System.out.printf("Runtime: %s%n", movie.getRuntime());
         System.out.printf("Synopsis: %s%n", movie.getSynopsis());
