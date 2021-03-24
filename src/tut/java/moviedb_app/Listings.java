@@ -1,8 +1,18 @@
 package tut.java.moviedb_app;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Listings {
+    public static List<Movie> movies;
+
+    static {
+        try {
+            movies = Scraper.getMovies();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void listingHeader() {
         System.out.println("\n=============================================================================================");
@@ -10,10 +20,8 @@ public class Listings {
         System.out.println("=============================================================================================");
     }
 
-    public static void showAll() throws IOException {
+    public static void showAll() {
         listingHeader();
-
-        var movies = Scraper.getMovies();
 
         for (int i = 0; i < movies.size(); i++) {
 
@@ -24,22 +32,5 @@ public class Listings {
 
         }
 
-    }
-
-    public static void showMovieInfo() throws Exception {
-        var cli = new CLI();
-        var userChoice = cli.getUserChoice();
-
-        var movies = Scraper.getMovies();
-        var movie = Scraper.getMovie(movies.get(--userChoice));
-
-        System.out.printf("Title: %s%n", movie.getTitle());
-        System.out.print("Genres: ");
-        if (movie.getGenres().size() > 1) movie.getGenres().forEach(genre -> System.out.printf("%s, ", genre));
-        else movie.getGenres().forEach(genre -> System.out.printf("%s", genre));
-        System.out.printf("%nRelease Date: %s%n", movie.getReleaseDate());
-        System.out.printf("Runtime: %s%n", movie.getRuntime());
-        System.out.printf("Synopsis: %s%n", movie.getSynopsis());
-        System.out.printf("More Info: %s%n", movie.getMoreInfoLink());
     }
 }
